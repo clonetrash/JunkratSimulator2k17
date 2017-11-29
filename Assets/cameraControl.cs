@@ -11,12 +11,14 @@ public class cameraControl : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
+		StartCoroutine(Tick());
 	}
 	
 	// Update is called once per frame
-	void LateUpdate () 
+	IEnumerator Tick () 
 	{
+		while (true) {
+		yield return null;
 		Vector3 posPosition = transform.position;
 		Vector3 minPosition = player.position - (Vector3)camBoxSize;
 		Vector3 maxPosition = player.position + (Vector3)camBoxSize;
@@ -27,5 +29,7 @@ public class cameraControl : MonoBehaviour {
 		posPosition = Vector3.Min(maxPosition,posPosition);
 
 		transform.position = posPosition;
+		}
 	}
+	
 }

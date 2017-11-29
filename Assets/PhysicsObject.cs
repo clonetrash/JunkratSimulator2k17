@@ -25,7 +25,7 @@ public class PhysicsObject : MonoBehaviour {
 	}
 
 	// Use this for initialization
-	void Start () 
+	public void Start () 
 	{
 		contactFilter.useTriggers = false;
 		contactFilter.SetLayerMask(Physics2D.GetLayerCollisionMask(gameObject.layer));  //übernimmt die Einstellung was mit was collided aus den default physics 2d einstellungen

@@ -6,23 +6,23 @@ public class PlayerControl : PhysicsObject {
 
 	public float maxSpeed = 7;
 	public float jumpTakeOffSpeed = 7;
-
+	public FloatProperty gold;
 	public static PlayerControl instance;
+	 private Animator animator;
 
-	private SpriteRenderer spriteRenderer;
 
-	private Collider2D coll;
 
 	// Use this for initialization
 	void Awake () 
 	{
-		spriteRenderer = GetComponent<SpriteRenderer> ();
 		instance = this;
+		 animator = GetComponent<Animator> ();
 	}
 	
-	void Start ()
+	new void Start ()
 	{
-		coll = GetComponent<Collider2D>();
+		gold.value = 0f; 
+		base.Start();
 	}
 
 	protected override void ComputeVelocity()
@@ -47,8 +47,10 @@ public class PlayerControl : PhysicsObject {
 			transform.localScale = new Vector3 (flipSprite ? -1 : 1,1,1);
 		}
 
-		targetVelocity = move * maxSpeed;
+		animator.SetBool ("grounded", grounded);
+        animator.SetFloat ("velocityX", Mathf.Abs (velocity.x) / maxSpeed);
 
-		Physics2D.IgnoreLayerCollision (LayerMask.NameToLayer("Platform") , LayerMask.NameToLayer("Player"), velocity.y > 0);
+		
+		targetVelocity = move * maxSpeed * (1/(1+gold.value/1000));
 	}
 }

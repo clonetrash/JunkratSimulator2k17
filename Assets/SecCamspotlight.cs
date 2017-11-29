@@ -55,7 +55,7 @@ public class SecCamspotlight : MonoBehaviour {
 
 	void OnDrawGizmos ()
 	{
-		Gizmos.color = Color.cyan;
+		Gizmos.color = Color.red;
 		Vector2 controlEdges = -transform.up * controlRange;
 		Gizmos.DrawLine (transform.position, (Vector2)transform.position + controlEdges.Rotate (controlAngle));
 		Gizmos.DrawLine (transform.position, (Vector2)transform.position + controlEdges.Rotate (-controlAngle));
