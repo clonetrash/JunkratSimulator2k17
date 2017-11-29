@@ -41,6 +41,8 @@ public class PlayerControl : PhysicsObject {
 				velocity.y = velocity.y * 0.5f;
 		}
 
+		fallThrough = Input.GetAxis ("Vertical") < -0.5 ;
+
 		bool flipSprite = (move.x > 0.0f);
 		if (move.x != 0)
 		{

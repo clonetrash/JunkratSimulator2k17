@@ -6,6 +6,7 @@ public class PhysicsObject : MonoBehaviour {
 
 	public float minGroundNormalY = 0.65f;
 	public float gravityModifier = 1f;
+	public LayerMask platformLayer;
 
 	protected Vector2 targetVelocity; 
 	protected bool grounded;
@@ -15,6 +16,7 @@ public class PhysicsObject : MonoBehaviour {
 	protected ContactFilter2D contactFilter;
 	protected RaycastHit2D[] hitBuffer = new RaycastHit2D[16];
 	protected List<RaycastHit2D>hitBufferList = new List<RaycastHit2D> (16);
+	protected bool fallThrough = false;
 
 	protected const float minMoveDistance = 0.001f;
 	protected const float shellRadius = 0.01f;
@@ -45,6 +47,14 @@ public class PhysicsObject : MonoBehaviour {
 	{
 		velocity += gravityModifier * Physics2D.gravity * Time.deltaTime;
 		velocity.x = targetVelocity.x;
+		int collisionMask = contactFilter.layerMask;
+		if (velocity.y < 0 && !fallThrough) {
+			collisionMask = collisionMask | platformLayer;
+		}
+		else {
+			collisionMask = collisionMask &(~ platformLayer);
+		}
+		contactFilter.SetLayerMask(collisionMask);
 
 		grounded = false;
 
