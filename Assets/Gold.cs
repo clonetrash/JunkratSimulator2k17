@@ -21,6 +21,11 @@ public class Gold : MonoBehaviour {
 		print ("HOLLA HOLLA GET $$$");
 		countdown.CountTime(100);
 		}
+		if (Input.GetButton("GoldDrop")) 
+		{
+		gold.value -= Time.deltaTime * 50;
+		print ("HOLLA HOLLA GET NO $$$");
+		}
 	}
 
 	void OnTriggerExit2D (Collider2D coll) 
