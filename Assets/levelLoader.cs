@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class levelLoader : MonoBehaviour {
+public class LevelLoader : MonoBehaviour {
 
-	public static levelLoader instance;
+	public static LevelLoader instance;
 
 	// Use this for initialization
 	void Awake () {

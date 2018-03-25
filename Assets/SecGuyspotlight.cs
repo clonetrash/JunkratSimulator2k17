@@ -10,11 +10,12 @@ public class SecGuyspotlight : MonoBehaviour {
 	public Transform eye;
 	public float moveDistance = 30f;
 	public float moveSpeed = 1f;
+	private Vector3 startPosition;
 
 	// Use this for initialization
 	void Start () 
 	{
-		
+		startPosition = (transform.position);
 	}
 	
 	// Update is called once per frame
@@ -28,7 +29,7 @@ public class SecGuyspotlight : MonoBehaviour {
 	{
         float position = Time.time * moveSpeed;
         position = Mathf.PingPong (position, moveDistance*2) - moveDistance;
-        transform.position = new Vector2 (position,this.transform.position.y);
+        transform.position = startPosition + new Vector3 (position,0,0);
         float directionCheck = (Time.time * moveSpeed) % (moveDistance*4);
         bool lookingRight = eye.eulerAngles.z < 180;
         if (directionCheck > moveDistance * 2 && lookingRight)
@@ -39,7 +40,7 @@ public class SecGuyspotlight : MonoBehaviour {
         {
              eye.eulerAngles = new Vector3 (0,0, -eye.eulerAngles.z);
         } 
-        print (lookingRight);
+       
 	}
 
 	void CheckVision()
@@ -54,8 +55,8 @@ public class SecGuyspotlight : MonoBehaviour {
 			RaycastHit2D hit = Physics2D.Raycast(eye.position, toPlayerDirection, toPlayerDirection.magnitude, seeMask);
 			if ( hit.collider ==null)
 			{
-				Debug.Log ("found u");
-				levelLoader.ResetLevel();
+				
+				LevelLoader.ResetLevel();
 			}
 			else{		
 				Debug.DrawRay (hit.point, hit.normal);

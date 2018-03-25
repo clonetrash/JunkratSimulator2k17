@@ -44,8 +44,8 @@ public class SecCamspotlight : MonoBehaviour {
 			RaycastHit2D hit = Physics2D.Raycast(transform.position, toPlayerDirection, toPlayerDirection.magnitude, seeMask);
 			if ( hit.collider ==null)
 			{
-				Debug.Log ("found u");
-				levelLoader.ResetLevel();
+				
+				LevelLoader.ResetLevel();
 			}
 			else{		
 				Debug.DrawRay (hit.point, hit.normal);
